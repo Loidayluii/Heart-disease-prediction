@@ -10,6 +10,9 @@ from sklearn.metrics import ConfusionMatrixDisplay
 
 from sklearn.metrics import classification_report
 
+from sklearn.metrics import roc_curve
+from sklearn.metrics import roc_auc_score
+
 
 # Đọc dữ liệu
 df = pd.read_csv("data/heart.csv")
@@ -54,3 +57,30 @@ disp.plot()
 plt.show()
 
 print(classification_report(y_test, y_pred))
+
+# Lấy xác suất của class 1 (mắc bệnh)
+y_prob = model.predict_proba(X_test)[:, 1]
+
+# Tính ROC
+fpr, tpr, thresholds = roc_curve(y_test, y_prob)
+
+# Tính AUC
+auc = roc_auc_score(y_test, y_prob)
+
+print(f"AUC: {auc:.4f}")
+plt.figure(figsize=(6,6))
+
+plt.plot(fpr, tpr, label=f"AUC = {auc:.3f}")
+
+plt.plot([0,1], [0,1], linestyle="--")
+
+plt.xlabel("False Positive Rate")
+
+plt.ylabel("True Positive Rate")
+
+plt.title("ROC Curve")
+
+plt.legend()
+
+plt.show()
+
