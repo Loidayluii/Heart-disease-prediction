@@ -13,6 +13,8 @@ from sklearn.metrics import classification_report
 from sklearn.metrics import roc_curve
 from sklearn.metrics import roc_auc_score
 
+import joblib 
+
 
 # Đọc dữ liệu
 df = pd.read_csv("data/heart.csv")
@@ -84,3 +86,5 @@ plt.legend()
 
 plt.show()
 
+
+joblib.dump(model, "models/heart_model.pkl")
