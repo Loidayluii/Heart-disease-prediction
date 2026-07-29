@@ -86,5 +86,7 @@ plt.legend()
 
 plt.show()
 
-
+# Lưu model 
 joblib.dump(model, "models/heart_model.pkl")
+# Lưu scaler 
+joblib.dump(scaler, "models/scaler.pkl")
